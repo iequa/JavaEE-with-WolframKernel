@@ -14,7 +14,7 @@ import javax.servlet.annotation.WebListener;
  */
 @WebListener
 public class UserModel {
-    private String log;
+    private String login;
     private String pass;
     private List<String> filesPath;
     private int userId;
@@ -23,31 +23,31 @@ public class UserModel {
     private String lastSessionID;
 
     public UserModel(){
-        log = null;
+        login = null;
         pass = null;
         filesPath = new ArrayList<>();
     }
     
     public UserModel(String log, String pass, int userId) {
-        this.log = log;
+        this.login = log;
         this.pass = pass;
         this.filesPath = new ArrayList<>();
         this.userId = userId;
     }
         
     public UserModel(String log, String pass, List<String> filesPath, int userId) {
-        this.log = log;
+        this.login = log;
         this.pass = pass;
         this.filesPath = filesPath;
         this.userId = userId;
     }
 
-    public String getLog() {
-        return log;
+    public String getLogin() {
+        return login;
     }
 
     public void setLog(String log) {
-        this.log = log;
+        this.login = log;
     }
 
     public String getPass() {
@@ -107,7 +107,7 @@ public class UserModel {
     }
     
     public boolean hasValue() {
-        if (this.log.isEmpty()
+        if (this.login.isEmpty()
                 && this.pass.isEmpty()
                 && this.userId == 0
             ) {

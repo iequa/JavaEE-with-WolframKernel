@@ -24,7 +24,7 @@
             <%
                 boolean log = false;
                 if  (
-                    request.getSession().getAttribute("logRes") == null 
+                    request.getSession(true).getAttribute("logRes") == null 
                     ||
                     Boolean.parseBoolean(
                         request.getSession().getAttribute("logRes").toString()) == Boolean.FALSE
@@ -40,7 +40,7 @@
                     log = true;
                     final UserModel user = (UserModel)request.getSession().getAttribute("user");
             %>
-                    <%= user.getLog()%>
+                    <%= user.getLogin()%>
                     </div>
                     <div class="blockLogout">
                     <a class="link" href="LogOut">(Выход)</a>

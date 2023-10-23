@@ -77,15 +77,13 @@ public boolean checkLogin()
                     response.sendRedirect("/WebBD/");
                 }
                 catch(IOException e) {
-                    connection.DBDisconnect();
                     System.out.println("Error in LoginCheck");      
                     System.out.println(e);
                 }
             } else {
                 boolean res = false;
-                connection.DBDisconnect();
                 request.getSession().setAttribute("logRes", res);
-                MessageCreator.addMessage("Неверный логин/Пароль");
+                MessageCreator.getInstance().addMessage(request.getSession(), "Неверный логин/Пароль");
                 //request.getSession().setAttribute("Message", "Неверный логин/Пароль");
                 response.sendRedirect("/WebBD/");
             }

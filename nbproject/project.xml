@@ -20,43 +20,33 @@
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-io-2.11.0-javadoc.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-io-2.11.0-sources.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-io-2.11.0-test-sources.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-io-2.11.0-tests.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-io-2.11.0.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-fileupload-1.4-javadoc.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-fileupload-1.4-sources.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-fileupload-1.4-test-sources.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-fileupload-1.4-tests.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-fileupload-1.4.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
             <web-module-additional-libraries/>

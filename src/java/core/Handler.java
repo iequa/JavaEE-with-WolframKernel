@@ -31,9 +31,6 @@ public class Handler extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (messageCreator == null) {
-            messageCreator = new MessageCreator(request);
-        }
 
         logged = false;
         if (request.getSession(true).getAttribute("logRes") != null)

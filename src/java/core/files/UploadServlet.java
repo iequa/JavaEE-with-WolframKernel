@@ -60,7 +60,7 @@ public class UploadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserModel user = (UserModel)request.getSession().getAttribute("user");
-        System.out.println("User %s trying to send/delete file ".formatted(user.getLog()));
+        System.out.println("User %s trying to send/delete file ".formatted(user.getLogin()));
         if (!CheckLog(request)) {
             return;
         }
@@ -75,9 +75,10 @@ public class UploadServlet extends HttpServlet {
             del = true;
         }
         if(fileName == null || fileName.isEmpty()) {
+            MessageCreator.getInstance().addMessage(request.getSession(), "Имя файла не может быть пустым!");
             throw new ServletException("File Name can't be null or empty");
         }
-        File file = new File(FILEPATH + user.getLog() + File.separator+fileName);
+        File file = new File(FILEPATH + user.getLogin() + File.separator + fileName);
         //Если файл существует на сервере, но его нет на носителе
         if(!file.exists()){
             final String sqlDelete = """
@@ -133,9 +134,6 @@ public class UploadServlet extends HttpServlet {
                 user.deleteFile(Integer.parseInt(request.getParameter("del")));
                 request.getSession().setAttribute("user", user);
                 System.out.println("File deleted on server successfully");
-                if (connection.connected) {
-                    connection.DBDisconnect();
-                }
             } catch (Exception ex) {
                 Logger.getLogger(UploadServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -156,7 +154,7 @@ public class UploadServlet extends HttpServlet {
             throws ServletException, IOException {
       System.out.println("Trying to get file from user "+request.getSession().getAttribute("u.log"));
       if (!CheckLog(request)) {
-          MessageCreator.addMessage("Пользователь не выполнил вход!");
+          MessageCreator.getInstance().addMessage(request.getSession(), "Пользователь не выполнил вход!");
           response.sendRedirect("/WebBD/");
           return;
       }
@@ -224,10 +222,10 @@ public class UploadServlet extends HttpServlet {
             
                // Write the file
                if( fileName.lastIndexOf("\\") >= 0 ) {
-                  file = new File( FILEPATH + user.getLog() + "\\"
+                  file = new File( FILEPATH + user.getLogin() + "\\"
                           + fileName.substring( fileName.lastIndexOf("\\"))) ;
                } else {
-                  file = new File( FILEPATH + user.getLog() + "\\"
+                  file = new File( FILEPATH + user.getLogin() + "\\"
                           + fileName.substring(fileName.lastIndexOf("\\")+1)) ;
                }
                fi.write( file ) ;
@@ -247,22 +245,19 @@ public class UploadServlet extends HttpServlet {
             System.out.println("Error in UploadServlet");
             System.out.println(ex);
             if (ex.getMessage().contains("the request was rejected because its size")) {
-                MessageCreator.addMessage("Файл имеет слишком большой размер");
+                MessageCreator.getInstance().addMessage(request.getSession(),
+                        "Файл имеет слишком большой размер"
+                );
                 return;
             }
          }
-      finally {
-          if (connection.connected) {
-              connection.DBDisconnect();
-          }
-       }
         System.out.println("doPOst");
         response.sendRedirect("/WebBD/");
     }
     
     protected static boolean CheckLog(HttpServletRequest request) {
         final String logRes = request.getSession().getAttribute("logRes").toString();
-        if(logRes == null && Boolean.parseBoolean(logRes) == Boolean.FALSE) {
+        if(logRes == null || Boolean.parseBoolean(logRes) == Boolean.FALSE) {
             System.out.println("User not logged");
             return false;
         }

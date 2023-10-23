@@ -7,34 +7,38 @@ package core.messages;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Пажылой ай3
  */
 public class MessageCreator {
-    static HttpServletRequest request;
     static private List<String> messages;
+    private static MessageCreator instance = new MessageCreator();
     
-    public MessageCreator(HttpServletRequest request) {
-        MessageCreator.request = request;
+    private MessageCreator() {
         messages = new ArrayList<>();
     }
     
-    public static void addMessage(String message) {
-        messages.add(message);
-        setMessages();
+    public static MessageCreator getInstance() {
+        return instance;
     }
     
-    public static void clearMessages() {
+    public void addMessage(HttpSession session, String message) {
+        messages.add(message);
+        setMessages(session);
+    }
+    
+    public void clearMessages() {
         messages.clear();
     }
 
-    private static void setMessages() {
+    private static void setMessages(HttpSession session) {
         String finalErrorMessage = "";
         for (int i = 0; i< messages.size(); i++) {
             finalErrorMessage += messages.get(i) + System.lineSeparator();
         }
-        request.getSession().setAttribute("Message", finalErrorMessage);
+        session.setAttribute("Message", finalErrorMessage);
     }
 }
