@@ -36,7 +36,7 @@ public class Handler extends HttpServlet {
         }
 
         logged = false;
-        if (request.getSession().getAttribute("logRes") != null)
+        if (request.getSession(true).getAttribute("logRes") != null)
         {
             logged = Boolean.parseBoolean(request.getSession().getAttribute("logRes").toString());
         }
