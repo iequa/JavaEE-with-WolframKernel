@@ -40,7 +40,7 @@ public class UploadServlet extends HttpServlet {
 
    private boolean isMultipart;
    private final String FILEPATH = SYSTEM_NAME.startsWith("win") ? 
-           "D:\\WebBDRemake\\Users_Content\\"
+           "D:\\WebBDRemake\\users_content\\"
            :
            "/opt/tomcat/user_files/"
            ;
