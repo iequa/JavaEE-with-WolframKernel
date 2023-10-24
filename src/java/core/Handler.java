@@ -4,7 +4,9 @@
  */
 package core;
 
+import core.login.LoginCheck;
 import core.messages.MessageCreator;
+import core.utils.SessionHelper;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebListener;
@@ -18,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebListener
 public class Handler extends HttpServlet {
+    public static String MAINPAGE = "/WebBD/";
+    public static String LOGINPAGE = "/WebBD/Login";
     boolean logged = false;
     MessageCreator messageCreator;
     /**
@@ -33,17 +37,17 @@ public class Handler extends HttpServlet {
             throws ServletException, IOException {
 
         logged = false;
-        if (request.getSession(true).getAttribute("logRes") != null)
-        {
+        if (request.getSession(true).getAttribute("logRes") != null) {
             logged = Boolean.parseBoolean(request.getSession().getAttribute("logRes").toString());
         }
         String uri = request.getRequestURI();
-        if (uri.equals("/WebBD/"))
-        {
+        if (logged && request.getSession().getAttribute("u") == null) {
+            request.removeAttribute("logRes");
+        }
+        if (uri.equals(MAINPAGE)) {
             request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
         }
-        if (uri.equals("/WebBD/Login"))
-        {
+        if (uri.equals(LOGINPAGE)) {
             request.getRequestDispatcher("/WEB-INF/view/LoginPage.jsp").forward(request, response);
         }
     }

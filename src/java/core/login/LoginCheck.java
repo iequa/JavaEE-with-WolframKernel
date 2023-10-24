@@ -36,12 +36,12 @@ public class LoginCheck extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final DBConn connection = new DBConn();
-    private String login;
-    private String pass;
+    private static final DBConn connection = new DBConn();
+    private static String login;
+    private static String pass;
     private boolean loginResult;
     
-public boolean checkLogin()
+public static boolean checkLogin()
 {
     try{
         if (login.isEmpty() || pass.isEmpty()) {
@@ -70,7 +70,6 @@ public boolean checkLogin()
         throws IOException {
             connection.tryConn();
             loginResult = connection.checkLogin(request);
-            final UserModel user = (UserModel) request.getSession().getAttribute("user");
             if(loginResult == true) {
                 request.getSession().setAttribute("logRes", loginResult);
                 try {

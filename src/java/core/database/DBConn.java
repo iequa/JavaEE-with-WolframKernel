@@ -36,8 +36,6 @@ public class DBConn {
     public ResultSet res;
     private Driver mydriv;
     private final static String LOG_SQL = "SELECT * FROM USERS";
-
-    
     
     public boolean tryConn(){
         if (connected) {

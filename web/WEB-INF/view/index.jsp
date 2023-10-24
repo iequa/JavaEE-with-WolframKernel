@@ -1,4 +1,6 @@
 
+<%@page import="core.utils.SessionHelper"%>
+<%@page import="core.PageTemplateRenderer"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="core.login.UserModel"%>
@@ -22,23 +24,17 @@
             </div>
             <div class="blockRight">
             <%
-                boolean log = false;
-                if  (
-                    request.getSession(true).getAttribute("logRes") == null 
-                    ||
-                    Boolean.parseBoolean(
-                        request.getSession().getAttribute("logRes").toString()) == Boolean.FALSE
-                ) 
+                boolean userLogged = SessionHelper.checkIsUserLogged(session);
+                if  (!userLogged)
                 {
-            %>
+        %>
                     <a class="link" href="/WebBD/Login">Вход</a>
                     </div>
             <%
                 }
                 else
                 {
-                    log = true;
-                    final UserModel user = (UserModel)request.getSession().getAttribute("user");
+                    final UserModel user = SessionHelper.getUserModelFromSession(session);
             %>
                     <%= user.getLogin()%>
                     </div>
@@ -51,20 +47,19 @@
             
         </h1>
         <% 
-                if (request.getSession().getAttribute("Message")!= null)
+                if (session.getAttribute("Message")!= null)
                 {
         %>
                     <div class="alert alert-danger" role="alert">
-                        <%=request.getSession().getAttribute("Message")%>
+                        <%=session.getAttribute("Message")%>
                     </div>
         <%
-                    request.getSession().setAttribute("Message", null);
+                    session.setAttribute("Message", null);
                 }
-            if(!log)
+            if(!userLogged)
             {
         %>
-            <div style ="margin-bottom: 0px;
-    padding-bottom: 20px" class="jumbotron">
+            <div style ="margin-bottom: 0px; padding-bottom: 20px" class="jumbotron">
                 <h1 class="display-4">Группа 220401</h1>
                 <p class="lead">Лучшие в своём деле.</p>
                 <hr class="my-4">
@@ -78,7 +73,7 @@
                 <h1 style =" text-align: center" class="display-4">Файловое хранилище</h1>
         <%
             }
-            if(!log)
+            if(!userLogged)
             {
         %>
             <p style="margin-left: 5px" class="font-weight-bold">Список студентов:</p>    
@@ -117,36 +112,15 @@
                 "https://tulsu.ru/schedule/?group=220401">
                 Расписание нового типа</a>
             </div>
-            <div class ="FilesBlock">
-                <table class="table">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Имя файла</th>
-                    <th scope="col">Действия</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <% 
-                    UserModel user = new UserModel();
-                    user = (UserModel)request.getSession().getAttribute("user");
-                    if (user.getFileCount() > 0) {
-                        for (int i = 0; i <  (user.getFileCount()); i++)
-                        {
-                %>
-                        <tr>
-                            <th scope="row"><%=i+1%></th>
-                            <td><%=user.getFileName(i)%></td>
-                            <td><a class="btn btn-primary" href="/WebBD/UploadServlet?load=<%=i%>">Загрузить</a></td>
-                            <td><a class="btn btn-danger" href="/WebBD/UploadServlet?del=<%=i%>">Удалить</a></td>
-                        </tr>
-                <%  
-                        }
-                    }
-                }
-                %>
-                  </tbody>
-                </table>
+            <div>
+                <button class="btn btn-primary" onclick="
+                        <%RequestDispatcher dispatcher =
+                            session.getServletContext().getRequestDispatcher("JSP_URI");
+                        %>">Файлики</button>
+                <button class="btn btn-danger" value="/WebBD/mathematica" onclick="">Wolfram Mathematica</button>
+        <%  
+            }
+        %>
             </div>
     </h:body>
 </html>
