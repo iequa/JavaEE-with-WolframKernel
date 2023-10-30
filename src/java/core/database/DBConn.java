@@ -34,14 +34,15 @@ public class DBConn {
     public static DatabaseMetaData meta;
     public static Connection con;
     public ResultSet res;
-    private Driver mydriv;
+    private static Driver mydriv;
     private final static String LOG_SQL = "SELECT * FROM USERS";
-    
+    static {
+        mydriv = new sap.jdbc4.sqlanywhere.IDriver();
+    }
     public boolean tryConn(){
         if (connected) {
             return true;
         }
-        mydriv = new sap.jdbc4.sqlanywhere.IDriver();
         try {
                 //DriverManager.registerDriver(mydriv);
                 con = DriverManager.getConnection(CONN_URL,CONN_LOGIN,CONN_PASS);
@@ -122,17 +123,12 @@ public class DBConn {
                 return true;
             }
             connected = false;
+            DriverManager.deregisterDriver(mydriv);
             if (res != null) {
                 res.close();
             }
             stat.close();
             con.close();
-            con = null;
-            meta = null;
-            stat = null;
-            res = null;
-            DriverManager.deregisterDriver(mydriv);
-            mydriv = null;
             System.out.println("Database disconnected");   
             return true;
         }
@@ -140,6 +136,15 @@ public class DBConn {
             System.out.println("Error in DBDisconnect");       
             System.out.println(e.getMessage());
             return false;
+        }
+    }
+    
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            dbDisconnect();
+        } finally {
+            super.finalize();
         }
     }
 }

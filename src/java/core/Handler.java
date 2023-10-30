@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 public class Handler extends HttpServlet {
     public static String MAINPAGE = "/WebBD/";
     public static String LOGINPAGE = "/WebBD/Login";
+    public static String STORAGEPAGE = "/WebBD/filestorage";
+    public static String MATHEMATICAPAGE = "/WebBD/mathematica";
     boolean logged = false;
     MessageCreator messageCreator;
     /**
@@ -44,12 +46,16 @@ public class Handler extends HttpServlet {
         if (logged && request.getSession().getAttribute("u") == null) {
             request.removeAttribute("logRes");
         }
-        if (uri.equals(MAINPAGE)) {
-            request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
+        if (uri.equals(STORAGEPAGE)) {
+            request.getRequestDispatcher("/WEB-INF/view/storage.jsp").forward(request, response);
         }
         if (uri.equals(LOGINPAGE)) {
             request.getRequestDispatcher("/WEB-INF/view/LoginPage.jsp").forward(request, response);
         }
+        if (uri.equals(MATHEMATICAPAGE)) {
+            request.getRequestDispatcher("/WEB-INF/view/mathematica.jsp").forward(request, response);
+        }
+        request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

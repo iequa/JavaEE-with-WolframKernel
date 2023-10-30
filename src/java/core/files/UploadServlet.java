@@ -35,7 +35,7 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 @WebServlet(name = "UploadServlet", urlPatterns = {"/UploadServlet"})
 public class UploadServlet extends HttpServlet {
-   private final DBConn connection = new DBConn();
+   private static final DBConn connection = new DBConn();
    private final static String SYSTEM_NAME = System.getProperty("os.name").toLowerCase();
 
    private boolean isMultipart;
