@@ -34,16 +34,14 @@ public class DBConn {
     public static DatabaseMetaData meta;
     public static Connection con;
     public ResultSet res;
-    private static Driver mydriv;
+    private Driver mydriv;
     private final static String LOG_SQL = "SELECT * FROM USERS";
-    static {
-        mydriv = new sap.jdbc4.sqlanywhere.IDriver();
-    }
     public boolean tryConn(){
         if (connected) {
             return true;
         }
         try {
+                mydriv = new sap.jdbc4.sqlanywhere.IDriver();
                 //DriverManager.registerDriver(mydriv);
                 con = DriverManager.getConnection(CONN_URL,CONN_LOGIN,CONN_PASS);
                 meta = con.getMetaData();

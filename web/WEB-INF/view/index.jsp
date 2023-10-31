@@ -5,7 +5,7 @@
 <%@page import="java.util.List"%>
 <%@page import="core.login.UserModel"%>
 <%@page import="java.io.File"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <script>
@@ -36,7 +36,7 @@
             else
             {
         %>
-                <h1 style =" text-align: center" class="display-4">Файловое хранилище</h1>
+                <h1 style ="text-align: center" class="display-4">Файловое хранилище</h1>
         <%
             }
             if(!userLogged)

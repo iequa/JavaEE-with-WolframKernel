@@ -4,9 +4,7 @@
  */
 package core;
 
-import core.login.LoginCheck;
 import core.messages.MessageCreator;
-import core.utils.SessionHelper;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebListener;
@@ -20,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebListener
 public class Handler extends HttpServlet {
-    public static String MAINPAGE = "/WebBD/";
-    public static String LOGINPAGE = "/WebBD/Login";
-    public static String STORAGEPAGE = "/WebBD/filestorage";
-    public static String MATHEMATICAPAGE = "/WebBD/mathematica";
+    public static final String MAINPAGE = "/WebBD/";
+    public static final String LOGINPAGE = "/WebBD/Login";
+    public static final String STORAGEPAGE = "/WebBD/filestorage";
+    public static final String MATHEMATICAPAGE = "/WebBD/mathematica";
     boolean logged = false;
     MessageCreator messageCreator;
     /**
@@ -46,18 +44,18 @@ public class Handler extends HttpServlet {
         if (logged && request.getSession().getAttribute("u") == null) {
             request.removeAttribute("logRes");
         }
-        if (uri.equals(STORAGEPAGE)) {
-            request.getRequestDispatcher("/WEB-INF/view/storage.jsp").forward(request, response);
+        System.out.println("Navigate to... %s".formatted(uri));
+        switch (uri) {
+            case STORAGEPAGE->navigate("storage.jsp", request, response);
+            case LOGINPAGE->navigate("LoginPage.jsp", request, response);
+            case MATHEMATICAPAGE -> navigate("mathematica.jsp", request, response);
+            default->navigate("index.jsp", request, response);
         }
-        if (uri.equals(LOGINPAGE)) {
-            request.getRequestDispatcher("/WEB-INF/view/LoginPage.jsp").forward(request, response);
-        }
-        if (uri.equals(MATHEMATICAPAGE)) {
-            request.getRequestDispatcher("/WEB-INF/view/mathematica.jsp").forward(request, response);
-        }
-        request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
     }
     
+    private void navigate(String target, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/view/%s".formatted(target)).forward(request, response);
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

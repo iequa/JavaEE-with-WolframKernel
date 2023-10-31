@@ -10,16 +10,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+    <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Группа 220401</title>
-    </head>
-    <body>
-        <h:head>
         <title>Группа 220401</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <style><%@include file="/WEB-INF/css/Style.css"%></style>
     </h:head>
+    <body>
     <h:body class = "body">
         <h1 class="header">
             <div class="blockLeft">
@@ -35,7 +32,7 @@
                 {
             %>
                     <a class="link" href="/WebBD/Login">Вход</a>
-                    </div>
+            </div>
             <%
                 }
                 else
