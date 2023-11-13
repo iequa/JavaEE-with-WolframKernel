@@ -67,13 +67,14 @@ public static boolean checkLogin()
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws IOException {
+        throws ServletException, IOException {
             connection.tryConn();
             loginResult = connection.checkLogin(request);
+            final var session = request.getSession();
             if(loginResult == true) {
-                request.getSession().setAttribute("logRes", loginResult);
+                session.setAttribute("logRes", loginResult);
                 try {
-                    response.sendRedirect("/WebBD/");
+                    getServletContext().getRequestDispatcher("/WebBD/").forward(request, response);
                 }
                 catch(IOException e) {
                     System.out.println("Error in LoginCheck");      
@@ -81,10 +82,10 @@ public static boolean checkLogin()
                 }
             } else {
                 boolean res = false;
-                request.getSession().setAttribute("logRes", res);
-                MessageCreator.getInstance().addMessage(request.getSession(), "Неверный логин/Пароль");
+                session.setAttribute("logRes", res);
+                MessageCreator.getInstance().addMessage(session, "Неверный логин/Пароль");
                 //request.getSession().setAttribute("Message", "Неверный логин/Пароль");
-                response.sendRedirect("/WebBD/");
+                getServletContext().getRequestDispatcher("/WebBD/").forward(request, response);
             }
         }
 
