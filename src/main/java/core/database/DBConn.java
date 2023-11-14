@@ -42,7 +42,9 @@ public class DBConn {
         }
         try {
                 mydriv = new sap.jdbc4.sqlanywhere.IDriver();
-                //DriverManager.registerDriver(mydriv);
+                //if (DriverManager.drivers().noneMatch(drv->drv.equals(mydriv))) {
+                //    DriverManager.registerDriver(mydriv);
+                //}
                 con = DriverManager.getConnection(CONN_URL,CONN_LOGIN,CONN_PASS);
                 meta = con.getMetaData();
                 stat = con.createStatement();
