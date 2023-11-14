@@ -4,8 +4,10 @@
  */
 package core.mathapi;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +42,7 @@ public class MathApi extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet MathApi at " + request.getContextPath() + "</h1>");
-            out.println(KernelLinkWrapper.evaluateString(List.of("hello world" + System.lineSeparator() + "1+1")));
+            out.println("<div>" + KernelLinkWrapper.evaluateString(List.of("hello world" + System.lineSeparator() + "1+1"))+ "</div>");
             out.println("</body>");
             out.println("</html>");
         }

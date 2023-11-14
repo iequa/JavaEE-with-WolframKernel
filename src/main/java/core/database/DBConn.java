@@ -42,6 +42,8 @@ public class DBConn {
         }
         try {
                 mydriv = new sap.jdbc4.sqlanywhere.IDriver();
+                //Class.forName("sap.jdbc4.sqlanywhere.IDriver");
+                DriverManager.setLoginTimeout(10000);
                 //if (DriverManager.drivers().noneMatch(drv->drv.equals(mydriv))) {
                 //    DriverManager.registerDriver(mydriv);
                 //}
@@ -52,7 +54,7 @@ public class DBConn {
                 connected = true;
                 return true;
             }
-             catch(SQLException ex){
+             catch(Exception ex){
                  System.out.println("Connection failed...");
                  System.out.println(ex);
                  connected = false;
