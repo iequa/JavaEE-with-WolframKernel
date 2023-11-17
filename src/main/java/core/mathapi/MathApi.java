@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebListener;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +22,10 @@ import ru.firstproject.kernelwrapper.KernelLinkWrapper;
  * @author Пажылой ай3
  */
 public class MathApi extends HttpServlet {
-
+    private String inputString;
+    private final static String LINUX_EOL = "\r";
+    private final static String WINDOWS_EOL = "\r\n";
+    private final static String MACOS_EOL = "\n";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,19 +37,24 @@ public class MathApi extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        inputString = request.getParameter("inputstring");
+        response.setContentType("text/html;charset=UTF-16");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet MathApi</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet MathApi at " + request.getContextPath() + "</h1>");
-            out.println("<div>" + KernelLinkWrapper.evaluateString(List.of("hello world" + System.lineSeparator() + "1+1"))+ "</div>");
-            out.println("</body>");
-            out.println("</html>");
+            if (!inputString.isEmpty()) {
+                final var q = parseStringToList(inputString);
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet MathApi</title>");            
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Servlet MathApi at " + request.getContextPath() + "</h1>");
+                out.println("<div>" + KernelLinkWrapper.evaluateString(q)+ "</div>");
+                out.println("</body>");
+                out.println("</html>");
+            }
         }
     }
 
@@ -87,4 +97,19 @@ public class MathApi extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private List <String> parseStringToList(String mainString) {
+        int startPos = 0;
+        int endPos = 0;
+        if (mainString.contains(WINDOWS_EOL)) {
+            return List.of("windows!!");
+        }
+        if (mainString.contains(MACOS_EOL)) {
+            return List.of("macos");
+        }
+        if (mainString.contains(LINUX_EOL)) {
+            return List.of("linux!!");
+        }
+        return List.of("hz =(");
+    }
+    
 }

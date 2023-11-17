@@ -37,6 +37,7 @@ public class Handler extends HttpServlet {
             throws ServletException, IOException {
 
         logged = false;
+        response.setCharacterEncoding("UTF-8");
         if (request.getSession(true).getAttribute("logRes") != null) {
             logged = Boolean.parseBoolean(request.getSession().getAttribute("logRes").toString());
         }
