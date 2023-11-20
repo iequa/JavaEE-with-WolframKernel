@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebListener;
@@ -37,23 +38,15 @@ public class MathApi extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setCharacterEncoding("UTF-8");
         inputString = request.getParameter("inputstring");
-        response.setContentType("text/html;charset=UTF-16");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             if (!inputString.isEmpty()) {
-                final var q = parseStringToList(inputString);
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet MathApi</title>");            
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Servlet MathApi at " + request.getContextPath() + "</h1>");
-                out.println("<div>" + KernelLinkWrapper.evaluateString(q)+ "</div>");
-                out.println("</body>");
-                out.println("</html>");
+                final var parsedLines = parseStringToList(inputString);
+                final var answer = KernelLinkWrapper.evaluateString(parsedLines);
+                request.setAttribute("question", inputString);
+                request.setAttribute("answer", answer);
+                request.getRequestDispatcher("/mathematica").forward(request, response);
             }
         }
     }
@@ -98,18 +91,20 @@ public class MathApi extends HttpServlet {
     }// </editor-fold>
 
     private List <String> parseStringToList(String mainString) {
-        int startPos = 0;
-        int endPos = 0;
+        final var lines = new ArrayList<String>();
         if (mainString.contains(WINDOWS_EOL)) {
-            return List.of("windows!!");
+            System.out.print("reading windows-like strings");
         }
         if (mainString.contains(MACOS_EOL)) {
-            return List.of("macos");
+            System.out.print("reading macos- like strings");
         }
         if (mainString.contains(LINUX_EOL)) {
-            return List.of("linux!!");
+            System.out.print("reading linux-like strings");
         }
-        return List.of("hz =(");
+        mainString.lines()
+                .filter(line->!line.isEmpty())
+                .forEach(line->lines.add(line))
+        ;
+        return lines;
     }
-    
 }

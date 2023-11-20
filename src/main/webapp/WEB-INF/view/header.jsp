@@ -7,7 +7,6 @@
 <%@page import="core.login.UserModel"%>
 <%@page import="core.login.UserModel"%>
 <%@page import="core.utils.SessionHelper"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <h:head>

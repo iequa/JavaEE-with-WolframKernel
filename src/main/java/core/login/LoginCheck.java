@@ -74,7 +74,7 @@ public static boolean checkLogin()
             if(loginResult == true) {
                 session.setAttribute("logRes", loginResult);
                 try {
-                    getServletContext().getRequestDispatcher("/WebBD/").forward(request, response);
+                    response.sendRedirect("/WebBD/");
                 }
                 catch(IOException e) {
                     System.out.println("Error in LoginCheck");      
@@ -84,8 +84,8 @@ public static boolean checkLogin()
                 boolean res = false;
                 session.setAttribute("logRes", res);
                 MessageCreator.getInstance().addMessage(session, "Неверный логин/Пароль");
-                //request.getSession().setAttribute("Message", "Неверный логин/Пароль");
-                getServletContext().getRequestDispatcher("/WebBD/").forward(request, response);
+                response.sendRedirect("/WebBD/");
+                //getServletContext().getRequestDispatcher("/WebBD/").forward(request, response);
             }
         }
 
