@@ -40,6 +40,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 .blockRight{
     border-radius: 10%;
+    display: block;
     font-family: "Bahnschrift";
     font-size: calc( (100vw - 80rem)/(60 - 10) * (1.5 - 1) + 1rem);
     text-align: center;
@@ -50,21 +51,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 .blockLogout{
+    display: grid;
     margin: auto;
     float: right;
     border-radius: 10%;
     font-family: "Bahnschrift";
-    font-size: calc( (100vw - 80rem)/(60 - 10) * (1.5 - 1) + 1rem);
+    font-size: calc( (100vw - 90rem)/(60 - 10) * (1.5 - 1) + 1rem);
     text-align: center;
     width: 8vw;
     height: 2vw;
     line-height: 2vw;
 }
 
-h1.header{
+.header{
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
+    display: inline-block;
     font-family: "Bahnschrift";
     background-color: rgba(128,128,128,0.6);
     border-color: rgba(128,128,128,0.4);

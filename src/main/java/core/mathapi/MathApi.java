@@ -92,15 +92,6 @@ public class MathApi extends HttpServlet {
 
     private List <String> parseStringToList(String mainString) {
         final var lines = new ArrayList<String>();
-        if (mainString.contains(WINDOWS_EOL)) {
-            System.out.print("reading windows-like strings");
-        }
-        if (mainString.contains(MACOS_EOL)) {
-            System.out.print("reading macos- like strings");
-        }
-        if (mainString.contains(LINUX_EOL)) {
-            System.out.print("reading linux-like strings");
-        }
         mainString.lines()
                 .filter(line->!line.isEmpty())
                 .forEach(line->lines.add(line))

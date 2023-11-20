@@ -17,12 +17,12 @@
     </h:head>
     <body>
     <h:body class = "body">
-        <h1 class="header">
+        <div class="header">
             <div class="blockLeft">
                 <a class="link" href="/WebBD/">Главная</a>
             </div>
             <div class="blockCenter">
-                <p class="font-weight-bold">Информационные Системы и Технологии</p>
+                Информационные Системы и Технологии
             </div>
             <div class="blockRight">
             <%
@@ -39,14 +39,11 @@
                     final UserModel user = SessionHelper.getUserModelFromSession(session);
             %>
                     <%= user.getLogin()%>
-                    </div>
-                    <div class="blockLogout">
-                    <a class="link" href="LogOut">(Выход)</a>
-                    </div>   
+                    <a class="link" href="LogOut">(выход)</a>
             <%
                 }
             %>
-        </h1>
+        </div>
         <% 
                 if (session.getAttribute("Message")!= null)
                 {
