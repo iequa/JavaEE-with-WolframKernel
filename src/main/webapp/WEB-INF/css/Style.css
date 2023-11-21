@@ -30,6 +30,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     background: #666666;
     font-size: calc( (100vw - 5rem)/(47 - 30) * (1.5 - 1) + 1rem);
     text-align: center;
+    font-weight: bold;
     width: 80%;
     height: 5vw;
     float: left;
