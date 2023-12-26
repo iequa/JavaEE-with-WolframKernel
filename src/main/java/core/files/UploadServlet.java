@@ -36,12 +36,12 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 @WebServlet(name = "UploadServlet", urlPatterns = {"/UploadServlet"})
 public class UploadServlet extends HttpServlet {
-   private static final DBConn connection = new DBConn();
+   private static final DBConn connection = DBConn.getInstance();
    private final static String SYSTEM_NAME = System.getProperty("os.name").toLowerCase();
 
    private boolean isMultipart;
    private final String FILEPATH = SYSTEM_NAME.startsWith("win") ? 
-           "D:\\WebBDRemake\\users_content\\"
+           "E:\\Projects\\Java\\WebWolfram\\users_content\\"
            :
            "/opt/tomcat/user_files/"
            ;
@@ -247,7 +247,6 @@ public class UploadServlet extends HttpServlet {
                 return;
             }
          }
-        System.out.println("doPOst");
         response.sendRedirect("/WebBD/filestorage");
     }
     

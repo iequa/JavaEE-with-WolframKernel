@@ -4,6 +4,7 @@
  */
 package core;
 
+import core.utils.SessionHelper;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebListener;
@@ -41,7 +42,13 @@ public class Handler extends HttpServlet {
         if (logged && request.getSession().getAttribute("u") == null) {
             request.removeAttribute("logRes");
         }
-        System.out.println("Navigate to... %s".formatted(uri));
+        final var user = SessionHelper.getUserModelFromSession(request.getSession());
+        if (user != null) {
+            System.out.println("User %s navigates to... %s".formatted(
+                user.getLogin(),
+                uri
+            ));
+        }
         switch (uri) {
             case STORAGEPAGE->navigate("storage.jsp", request, response);
             case LOGINPAGE->navigate("loginpage.jsp", request, response);

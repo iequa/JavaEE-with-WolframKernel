@@ -36,7 +36,7 @@ public class LoginCheck extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final DBConn connection = new DBConn();
+    private static final DBConn connection = DBConn.getInstance();
     private static String login;
     private static String pass;
     private boolean loginResult;

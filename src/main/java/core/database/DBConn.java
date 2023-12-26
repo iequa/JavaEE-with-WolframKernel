@@ -62,7 +62,7 @@ public class DBConn {
                 con = DriverManager.getConnection(CONN_URL,CONN_LOGIN,CONN_PASS);
                 meta = con.getMetaData();
                 stat = con.createStatement();
-                System.out.println("Connection to Store DB succesfull!");
+                System.out.println("DB connected.");
                 connected = true;
                 DriverManager.setLoginTimeout(10000);
                 return true;
