@@ -1,6 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="core.utils.SessionHelper"%>
 <%@page import="core.login.UserModel"%>
+<%//Не позволяем просматривать без авторизации
+    SessionHelper.checkWatchPermission(session, request, response);
+%>
 <!DOCTYPE html>
 <html>
 <h:body class = "body">

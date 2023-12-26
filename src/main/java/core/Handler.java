@@ -4,7 +4,6 @@
  */
 package core;
 
-import core.messages.MessageCreator;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebListener;
@@ -22,8 +21,6 @@ public class Handler extends HttpServlet {
     public static final String LOGINPAGE = "/WebBD/Login";
     public static final String STORAGEPAGE = "/WebBD/filestorage";
     public static final String MATHEMATICAPAGE = "/WebBD/mathematica";
-    boolean logged = false;
-    MessageCreator messageCreator;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,8 +32,7 @@ public class Handler extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        logged = false;
+        boolean logged = false;
         response.setCharacterEncoding("UTF-8");
         if (request.getSession(true).getAttribute("logRes") != null) {
             logged = Boolean.parseBoolean(request.getSession().getAttribute("logRes").toString());

@@ -6,7 +6,6 @@ package core.messages;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -30,8 +29,9 @@ public class MessageCreator {
         setMessages(session);
     }
     
-    public void clearMessages() {
+    public MessageCreator clearMessages() {
         messages.clear();
+        return this;
     }
 
     private static void setMessages(HttpSession session) {
@@ -40,5 +40,6 @@ public class MessageCreator {
             finalErrorMessage += messages.get(i) + System.lineSeparator();
         }
         session.setAttribute("Message", finalErrorMessage);
+        messages.clear();
     }
 }

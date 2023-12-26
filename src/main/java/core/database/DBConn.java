@@ -13,7 +13,8 @@ import java.sql.Statement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import core.login.UserModel;
-import core.login.UsersTable;
+import core.login.DBUserModel;
+import core.messages.MessageCreator;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,23 +28,28 @@ import javax.servlet.annotation.WebListener;
 public class DBConn {
     public boolean connected;
     private final static String CONN_LOGIN = "iequa";
-    private final static String CONN_PASS = "UserPassword1";
-    private final static String CONN_URL = "jdbc:sqlanywhere:kursbd";
+    private final static String CONN_PASS = "postgres";
+    //private final static String CONN_URL = "jdbc:sqlanywhere:kursbd";
+    private final static String CONN_URL = "jdbc:postgresql://localhost:5432/sitedata";
     
     public Statement stat;
     public static DatabaseMetaData meta;
     public static Connection con;
     public ResultSet res;
     private Driver mydriv;
-    private final static String LOG_SQL = "SELECT * FROM USERS";
+    private final static String LOG_SQL = "select * from public.\"users\"";
+    
+    public DBConn() {
+        tryConn();
+    }
+    
     public boolean tryConn(){
         if (connected) {
             return true;
         }
         try {
-                mydriv = new sap.jdbc4.sqlanywhere.IDriver();
+                //mydriv = new sap.jdbc4.sqlanywhere.IDriver();
                 //Class.forName("sap.jdbc4.sqlanywhere.IDriver");
-                DriverManager.setLoginTimeout(10000);
                 //if (DriverManager.drivers().noneMatch(drv->drv.equals(mydriv))) {
                 //    DriverManager.registerDriver(mydriv);
                 //}
@@ -52,6 +58,7 @@ public class DBConn {
                 stat = con.createStatement();
                 System.out.println("Connection to Store DB succesfull!");
                 connected = true;
+                DriverManager.setLoginTimeout(10000);
                 return true;
             }
              catch(Exception ex){
@@ -66,32 +73,29 @@ public class DBConn {
         try{
                 final var userLogin = request.getParameter("username");
                 final var userPass = request.getParameter("password");
-                final String fileCountSQL = "select count() from usersfiles where user_id = '%s'";
-                final String fileNamesSQL = "select usersfiles.fname FROM usersfiles where user_id = '%s'";
+                final String fileCountSQL = "select count(*) from public.\"usersfiles\" where user_id = '%s'";
+                final String fileNamesSQL = "select \"usersfiles\".fname from public.\"usersfiles\" where user_id = '%s'";
                 if(!userLogin.isEmpty() && !userPass.isEmpty()) {
                     UserModel tmpuser = new UserModel();
-                    List<UsersTable> tableResults = new ArrayList<>();
+                    List<DBUserModel> tableResults = new ArrayList<>();
                     final var table = stat.executeQuery(LOG_SQL);
                     while(table.next()) {
-                        final var tmpTableElem = new UsersTable();
-                        tmpTableElem.login = table.getObject(1).toString();
-                        tmpTableElem.pass = table.getObject(2).toString();
-                        tmpTableElem.user_id = Integer.parseInt(table.getObject(3).toString());
+                        final var tmpTableElem = new DBUserModel();
+                        tmpTableElem.user_id = Integer.parseInt(table.getObject(1).toString());
+                        tmpTableElem.login = table.getObject(2).toString();
+                        tmpTableElem.pass = table.getObject(3).toString();
+                         
                         tableResults.add(tmpTableElem);
                     }
                     //Ищем пользователя с соответствующими данными
-                    final var userSelectResult = tableResults.stream()
-                            .filter(f->
-                                    f.login.equals(userLogin)
-                                    && f.pass.equals(userPass)
-                            ).toList();
-                    if (userSelectResult.isEmpty()) {
-                        return false;
-                    }
-                    final var loggedUser = userSelectResult.get(0);
-                    tmpuser.setID(loggedUser.user_id);
-                    tmpuser.setLog(loggedUser.login);
-                    tmpuser.setPass(loggedUser.pass);
+                    final DBUserModel user = tableResults.stream()
+                            .filter(f -> f.login.equals(userLogin))
+                            .filter(f -> f.pass.equals(userPass))
+                            .findFirst()
+                            .orElseThrow();
+                    tmpuser.setID(user.user_id);
+                    tmpuser.setLog(user.login);
+                    tmpuser.setPass(user.pass);
                     //Получаем количество файлов
                     final var fileCountResult = stat.executeQuery(fileCountSQL.formatted(tmpuser.getID()));
                     fileCountResult.next();
@@ -111,9 +115,9 @@ public class DBConn {
                         return false;
                 }
         } catch(Exception ex) {
-            System.out.println("Error in DBConn");
-            System.out.println("Connection failed...");
+            System.out.println("Error in DBConn handle");
             System.out.println(ex);
+            MessageCreator.getInstance().addMessage(request.getSession(), ex.getMessage());
             return false;      
         }
         return false;

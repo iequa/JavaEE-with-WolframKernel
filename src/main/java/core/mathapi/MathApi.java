@@ -4,15 +4,11 @@
  */
 package core.mathapi;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebListener;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +39,7 @@ public class MathApi extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             if (!inputString.isEmpty()) {
                 final var parsedLines = parseStringToList(inputString);
+                System.out.println(System.getProperty("user.dir"));
                 final var answer = KernelLinkWrapper.evaluateString(parsedLines);
                 request.setAttribute("question", inputString);
                 request.setAttribute("answer", answer);

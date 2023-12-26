@@ -47,12 +47,12 @@ public static boolean checkLogin()
         if (login.isEmpty() || pass.isEmpty()) {
             return false;
         }
-            final String SQL = "select * from users";
-            List<UsersTable> resSQL = new ArrayList<>();
+            final String SQL = "select * from public.\"users\"";
+            List<DBUserModel> resSQL = new ArrayList<>();
             connection.res = connection.stat.executeQuery(SQL);
             while(connection.res.next())
             {
-                resSQL.add((UsersTable)connection.res.getObject(1));
+                resSQL.add((DBUserModel)connection.res.getObject(1));
             }
             final var loginResult = resSQL.stream()
                     .filter(f-> f.login.equals(login) && f.pass.equals(pass))
@@ -71,7 +71,7 @@ public static boolean checkLogin()
             connection.tryConn();
             loginResult = connection.checkLogin(request);
             final var session = request.getSession();
-            if(loginResult == true) {
+            if(loginResult) {
                 session.setAttribute("logRes", loginResult);
                 try {
                     response.sendRedirect("/WebBD/");

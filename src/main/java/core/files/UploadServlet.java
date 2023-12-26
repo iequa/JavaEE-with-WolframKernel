@@ -7,6 +7,7 @@ package core.files;
 import core.login.UserModel;
 import core.database.DBConn;
 import core.messages.MessageCreator;
+import core.utils.SessionHelper;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -44,6 +45,11 @@ public class UploadServlet extends HttpServlet {
            :
            "/opt/tomcat/user_files/"
            ;
+   private final String FOLDER_SEPARATOR = SYSTEM_NAME.startsWith("win") ? 
+           "\\"
+           :
+           "/"
+           ;
            //"C:\\Users\\Artyom\\Desktop\\laby univer\\3 krs\\5 sem\\KURS BD\\WebBD\\Users_Content\\";
    private final int MAXFILESIZE = 5000000 * 1024;
    private final int MAXMEMSIZE = 5000000 * 1024;
@@ -64,7 +70,6 @@ public class UploadServlet extends HttpServlet {
         if (!CheckLog(request)) {
             return;
         }
-        request.getParameter(FILEPATH);
         String fileName;
         boolean del = false;
         if(request.getParameter("load") != null) {
@@ -85,8 +90,9 @@ public class UploadServlet extends HttpServlet {
                     delete from \"usersfiles\" 
                     where usersfiles.user_id =  '%s'
                     and usersfiles.fname = '%s';"""
-                     .formatted(Integer.toString(user.getID()),
-                                 fileName
+                    .formatted(
+                        Integer.toString(user.getID()),
+                        fileName
                      );
                 if(connection.connected || connection.tryConn()) {
                     try {
@@ -94,15 +100,14 @@ public class UploadServlet extends HttpServlet {
                     } catch (SQLException ex) {
                         Logger.getLogger(UploadServlet.class.getName())
                                 .log(Level.SEVERE, null, ex);
-                        }
+                    }
                 }
             try {
                 user.deleteFile(fileName);
             } catch (Exception ex) {
                 Logger.getLogger(UploadServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            request.getSession().setAttribute("Message", "File doesn't exists on server. Deleted in DB");
-            response.sendRedirect("/WebBD/");
+            MessageCreator.getInstance().addMessage(request.getSession(), "Файл удалён.");
         }
         if (!del) {
             System.out.println("File location on server::" + file.getAbsolutePath());
@@ -138,7 +143,7 @@ public class UploadServlet extends HttpServlet {
                 Logger.getLogger(UploadServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        response.sendRedirect("/WebBD/");
+        response.sendRedirect("/WebBD/filestorage");
     }
 
     /**
@@ -152,7 +157,9 @@ public class UploadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      System.out.println("Trying to get file from user "+request.getSession().getAttribute("u.log"));
+      System.out.println("Trying to get file from user %s"
+              .formatted(SessionHelper.getUserModelFromSession(request.getSession()).getLogin())
+      );
       if (!CheckLog(request)) {
           MessageCreator.getInstance().addMessage(request.getSession(), "Пользователь не выполнил вход!");
           response.sendRedirect("/WebBD/");
@@ -161,20 +168,10 @@ public class UploadServlet extends HttpServlet {
       isMultipart = ServletFileUpload.isMultipartContent(request);
       response.setContentType("text/html");
       java.io.PrintWriter out = response.getWriter( );
-
       
       if( !isMultipart ) {
-         out.println("<html>");
-         out.println("<head>");
-         out.println("<title>Servlet upload</title>");  
-         out.println("</head>");
-         out.println("<body>");
-         out.println("<p>No file uploaded</p>"); 
-         out.println("</body>");
-         out.println("</html>");
-         return;
+          MessageCreator.getInstance().addMessage(request.getSession(), "No file uploaded");
       }
-
   
       DiskFileItemFactory factory = new DiskFileItemFactory();
    
@@ -208,8 +205,8 @@ public class UploadServlet extends HttpServlet {
                 }
             }
             
-            if (fi.getName().equals("")) {
-                request.getSession().setAttribute("Message", "Файл не выбран1");
+            if (fi.getName().isEmpty()) {
+                request.getSession().setAttribute("Message", "Файл не выбран!");
                 throw new Exception("no file");
             }
             if ( !fi.isFormField()) {
@@ -221,24 +218,23 @@ public class UploadServlet extends HttpServlet {
                long sizeInBytes = fi.getSize();
             
                // Write the file
-               if( fileName.lastIndexOf("\\") >= 0 ) {
-                  file = new File( FILEPATH + user.getLogin() + "\\"
-                          + fileName.substring( fileName.lastIndexOf("\\"))) ;
+               if( fileName.lastIndexOf(FOLDER_SEPARATOR) >= 0 ) {
+                  file = new File( FILEPATH + user.getLogin() + FOLDER_SEPARATOR
+                          + fileName.substring( fileName.lastIndexOf(FOLDER_SEPARATOR)));
                } else {
-                  file = new File( FILEPATH + user.getLogin() + "\\"
-                          + fileName.substring(fileName.lastIndexOf("\\")+1)) ;
+                  file = new File( FILEPATH + user.getLogin() + FOLDER_SEPARATOR
+                          + fileName.substring(fileName.lastIndexOf(FOLDER_SEPARATOR)+1));
                }
-               fi.write( file ) ;
+               fi.write(file);
             }
         }
             user.addFile(file.getName());
             //user.addFile((Integer)request.getSession().getAttribute("u.fCount"));
             final String insertSqlString = "INSERT INTO usersfiles (user_id, fname) VALUES ( '%s', '%s')";
-            if(!connection.connected && connection.tryConn()) {
+            if(connection.connected && connection.tryConn()) {
                 connection.stat.execute(insertSqlString.formatted(
                     user.getID(),file.getName())
                 );
-                //executeQuery(ToBaseSQL);
                 request.getSession().setAttribute("user", user);
             }
          } catch(Exception ex) {
@@ -252,7 +248,7 @@ public class UploadServlet extends HttpServlet {
             }
          }
         System.out.println("doPOst");
-        response.sendRedirect("/WebBD/");
+        response.sendRedirect("/WebBD/filestorage");
     }
     
     protected static boolean CheckLog(HttpServletRequest request) {

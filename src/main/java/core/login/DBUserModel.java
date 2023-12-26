@@ -8,7 +8,7 @@ package core.login;
  *
  * @author Artyom
  */
-public class UsersTable {
+public class DBUserModel {
     public String login;
     public String pass;
     public int user_id;
