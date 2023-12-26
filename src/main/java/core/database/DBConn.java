@@ -18,15 +18,14 @@ import core.messages.MessageCreator;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.annotation.WebListener;
 
 /**
  *
  * @author Artyom
  */
-@WebListener
 public class DBConn {
-    public boolean connected;
+    private static DBConn instance;
+    public static boolean connected;
     private final static String CONN_LOGIN = "iequa";
     private final static String CONN_PASS = "postgres";
     //private final static String CONN_URL = "jdbc:sqlanywhere:kursbd";
@@ -39,8 +38,15 @@ public class DBConn {
     private Driver mydriv;
     private final static String LOG_SQL = "select * from public.\"users\"";
     
-    public DBConn() {
+    private DBConn() {
         tryConn();
+    }
+    
+    public static synchronized DBConn getInstance() {
+        if (instance == null) {
+            instance = new DBConn();
+        }
+        return instance;
     }
     
     public boolean tryConn(){
@@ -129,7 +135,6 @@ public class DBConn {
                 return true;
             }
             connected = false;
-            DriverManager.deregisterDriver(mydriv);
             if (res != null) {
                 res.close();
             }
@@ -142,15 +147,6 @@ public class DBConn {
             System.out.println("Error in DBDisconnect");       
             System.out.println(e.getMessage());
             return false;
-        }
-    }
-    
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            dbDisconnect();
-        } finally {
-            super.finalize();
         }
     }
 }
