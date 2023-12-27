@@ -40,12 +40,12 @@ public class UploadServlet extends HttpServlet {
    private final static String SYSTEM_NAME = System.getProperty("os.name").toLowerCase();
 
    private boolean isMultipart;
-   private final String FILEPATH = SYSTEM_NAME.startsWith("win") ? 
+   public static final String FILEPATH = SYSTEM_NAME.startsWith("win") ? 
            "E:\\Projects\\Java\\WebWolfram\\users_content\\"
            :
            "/opt/tomcat/user_files/"
            ;
-   private final String FOLDER_SEPARATOR = SYSTEM_NAME.startsWith("win") ? 
+   public static final String FOLDER_SEPARATOR = SYSTEM_NAME.startsWith("win") ? 
            "\\"
            :
            "/"

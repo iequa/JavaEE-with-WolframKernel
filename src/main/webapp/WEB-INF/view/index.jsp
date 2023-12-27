@@ -1,6 +1,5 @@
 
 <%@page import="core.utils.SessionHelper"%>
-<%@page import="core.PageTemplateRenderer"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="core.login.UserModel"%>
@@ -10,12 +9,7 @@
 <!DOCTYPE html>
 <script>
     function actionResolver(actName) {
-        if (actName === 'filestorage') {
             window.location=actName;
-        }
-        if (actName === 'mathematica') {
-            window.location=actName;
-        }
     }
 </script>
 <html>
@@ -71,16 +65,20 @@
                 </form>
             </div>
             <div class= "RightWidget">
-                <a class="link" href=
-                "http://olymp.tsu.tula.ru/">
-                Расписание старого типа</a>
-                <a class="link" href=
-                "https://tulsu.ru/schedule/?group=220401">
-                Расписание нового типа</a>
+                <a class="link" href="http://olymp.tsu.tula.ru/">
+                Расписание старого типа
+                </a>
+                <a class="link" href="https://tulsu.ru/schedule/?group=220401">
+                Расписание нового типа
+                </a>
             </div>
             <div>
-                <button class="btn btn-primary" onclick="actionResolver('filestorage')">Файлики</button>
-                <button class="btn btn-danger" onClick="actionResolver('mathematica')">Wolfram Mathematica</button>
+                <button class="btn btn-primary" onclick="actionResolver('filestorage')">
+                    Файловое хранилище
+                </button>
+                <button class="btn btn-danger" onClick="actionResolver('mathematica')">
+                    Wolfram Mathematica lite
+                </button>
         <%  
             }
         %>

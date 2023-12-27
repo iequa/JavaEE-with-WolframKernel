@@ -186,6 +186,11 @@ body{
     text-align: right;
     overflow: scroll;
 }
+
+.table-act-form {
+    vertical-align: middle;
+    position: fixed;
+}
 /*FILES BLOCK & LINK_END */
 
 /*LOGIN BLOCK */

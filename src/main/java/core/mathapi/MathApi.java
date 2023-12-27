@@ -4,6 +4,9 @@
  */
 package core.mathapi;
 
+import core.files.UploadServlet;
+import core.utils.SessionHelper;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,7 +22,8 @@ import ru.firstproject.kernelwrapper.KernelLinkWrapper;
  * @author Пажылой ай3
  */
 public class MathApi extends HttpServlet {
-    private String inputString;
+    private String inputString = "";
+    private String evaluateFileIndex = "";
     private final static String LINUX_EOL = "\r";
     private final static String WINDOWS_EOL = "\r\n";
     private final static String MACOS_EOL = "\n";
@@ -35,13 +39,24 @@ public class MathApi extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         inputString = request.getParameter("inputstring");
+        evaluateFileIndex = request.getParameter("file");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            if (!inputString.isEmpty()) {
+            if (inputString != null && !inputString.isEmpty()) {
                 final var parsedLines = parseStringToList(inputString);
-                System.out.println(System.getProperty("user.dir"));
                 final var answer = KernelLinkWrapper.evaluateString(parsedLines);
                 request.setAttribute("question", inputString);
+                request.setAttribute("answer", answer);
+                request.getRequestDispatcher("/mathematica").forward(request, response);
+            } else if (evaluateFileIndex != null && !evaluateFileIndex.isEmpty()) {
+                final var user = SessionHelper.getUserModelFromSession(request.getSession());
+                final var nbExpr = "Get[FileNameJoin[{\"%s%s\", \"%s\"}]]".formatted(
+                        UploadServlet.FILEPATH,    
+                        user.getLogin(),
+                        user.getFileName(Integer.parseInt(evaluateFileIndex))
+                );
+                final var answer = KernelLinkWrapper.evaluateString(List.of(nbExpr));
+                request.setAttribute("question", "evaluated file '%s'".formatted(user.getFileName(Integer.parseInt(evaluateFileIndex))));
                 request.setAttribute("answer", answer);
                 request.getRequestDispatcher("/mathematica").forward(request, response);
             }

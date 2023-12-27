@@ -42,12 +42,24 @@
                     if (user.getFileCount() > 0) {
                         for (int i = 0; i < (user.getFileCount()); i++)
                         {
+                            if (user.getFileName(i).endsWith(".nb"))
                 %>
                         <tr>
                             <th scope="row"><%=i + 1%></th>
                             <td><%=user.getFileName(i)%></td>
-                            <td><a class="btn btn-primary" href="/WebBD/UploadServlet?load=<%=i%>">Загрузить</a></td>
-                            <td><a class="btn btn-danger" href="/WebBD/UploadServlet?del=<%=i%>">Удалить</a></td>
+                            <td>
+                <%
+                        if (user.getFileName(i).endsWith(".nb") || user.getFileName(i).endsWith(".m")) {
+                %>
+                            <form class="table-act-form" method="post" action="${pageContext.request.contextPath}/mathematica/mathapi?file=<%=i%>" >
+                                <button class="btn btn-secondary">Запустить в Wolfram lite</button>
+                            </form>
+                <%
+                        }
+                %>
+                                <a class="btn btn-primary" href="/WebBD/UploadServlet?load=<%=i%>">Загрузить</a>
+                                <a class="btn btn-danger" href="/WebBD/UploadServlet?del=<%=i%>">Удалить</a>
+                            </td>
                         </tr>
                 <%  
                         }
