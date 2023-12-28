@@ -1,0 +1,223 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 21 нояб. 2022 г., 10:57:31
+    Author     : YA
+*/
+.link{
+    font-family: "Bahnschrift";
+    text-decoration: none;
+    color: #000000;
+}
+
+/*HEADER */
+.blockLeft{
+    border-radius: 10%;
+    font-family: "Bahnschrift";
+    font-size: calc( (100vw - 80rem)/(60 - 10) * (1.5 - 1) + 1rem);
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5vw;
+    width: 10%;
+    height: 5vw;
+    float: left;
+
+}
+.blockCenter{
+    margin: auto;
+    background: #666666;
+    font-size: calc( (100vw - 5rem)/(47 - 30) * (1.5 - 1) + 1rem);
+    text-align: center;
+    width: 80%;
+    height: 5vw;
+    float: left;
+    min-width: 40px;
+    min-height: 30px;
+
+}
+
+.blockRight{
+    border-radius: 10%;
+    font-family: "Bahnschrift";
+    font-size: calc( (100vw - 80rem)/(60 - 10) * (1.5 - 1) + 1rem);
+    text-align: center;
+    width: 10%;
+    height: 5vw;
+    line-height: 5vw;
+    float: left;
+}
+
+.blockLogout{
+    margin: auto;
+    float: right;
+    border-radius: 10%;
+    font-family: "Bahnschrift";
+    font-size: calc( (100vw - 80rem)/(60 - 10) * (1.5 - 1) + 1rem);
+    text-align: center;
+    width: 8vw;
+    height: 2vw;
+    line-height: 2vw;
+}
+
+h1.header{
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    font-family: "Bahnschrift";
+    background-color: rgba(128,128,128,0.6);
+    border-color: rgba(128,128,128,0.4);
+    width: 100vw;
+    height: 5vw;
+    min-height: 30px;
+}
+/*HEADER_END */
+
+/*MAIN_CONT */
+div.mainContainer{
+    background-color: rgba(250,250,250,0.5);
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em
+}
+/*MAIN_CONT_END */
+
+/*MAIN_HEADER */
+div.MainHeader{
+    background-color: rgba(69,175,94,0.5);
+    font-family: 'Gilroy-Bold', sans-serif;
+    font-size: calc( (120vw - 80rem)/(60 - 10) * (1.5 - 1) + 1rem);
+    height: 3vw;
+    text-align: center;
+    min-width: 60px;
+    min-height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20vw;
+}
+/*MAIN_HEADER_END */
+
+/*WIDGET */
+.RightWidget{
+    background-color: rgba(1,255,255,1);
+    margin-left: 0;
+    margin-top: 0vh;
+    margin-right: 0;
+    display: flex;
+    width: 20vw;
+    height: 6.1vw;
+    min-height: 2vw;
+    font-size: calc( (100vw - 80rem)/(60 - 10) * (1.5 - 1) + 1rem);
+    flex-direction: column;
+    float: right;
+    justify-content: center;
+    text-align: center;
+    border-style: groove;
+    border-width: 1px;
+    border-color : #1b1e21;
+}
+
+.Widget2{
+    background-color: rgba(1,255,255,1);
+    margin-left: 0;
+    position: relative;
+    margin-top: 0;
+    margin-right: 0;
+    display: flex;
+    height: auto;
+    width: 20vw;
+    font-size: calc( (100vw - 80rem)/(60 - 10) * (1.5 - 1) + 1rem);
+    flex-direction: column;
+    float: left;
+    justify-content: center;
+    border-style: groove;
+    border-width: 1px;
+    border-color : #1b1e21;
+    
+}
+/*WIDGET_END */
+
+/*BODY DEFAULT */
+body{
+    background-color: rgba(255,255,255,1);
+    margin-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 100wv;
+    height: 100wh;
+}
+/*BODY DEFAULT_END */
+
+/*FILES BLOCK & LINK */
+.FileLinks{
+    margin-left: auto;
+    margin-right: auto;
+    width: 10em;
+    height: auto;
+    min-height: 2vw;
+    background-color: #ffe8a1;
+    align-content: flex-start;
+    text-align: right;
+    
+    
+    calc((100vw - 5rem)/(47 - 30) * (1.5 - 1) + 1rem);
+}
+.FilesBlock{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0%;
+    margin-bottom: auto;
+    width: 100%;
+    min-width: 25vw;
+    height: 65vh;
+    min-height: 40%;
+    border-style: solid;
+    border-color : #1b1e21;
+    background-color: rgba(150,163,161,1);
+    align-content: flex-start;
+    display:inline-block;
+    justify-content: center;
+    text-align: right;
+    overflow: scroll;
+}
+/*FILES BLOCK & LINK_END */
+
+/*LOGIN BLOCK */
+.LoginPage{
+    font-family: Calibri, Helvetica, sans-serif;  
+    background-color: rgba(205,201,201,1);  
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin: auto;
+    
+    padding : 10px;
+    width: 20vw;
+    height: 10vw;
+    border-radius: 5%;
+    min-height: 140px;
+    min-width: 160px;
+}
+
+/*LOGIN BLOCK_END */
+
+.BigText{
+    text-align: center;
+    margin-top: 10vw;
+    font-family: Calibri, Helvetica, sans-serif;  
+    font-size: calc( (100vw - 1rem)/(40 - 10) * (1.5 - 1) + 1rem);
+}
+.LoginLabels{
+   background-color: rgba(205,201,201,1);
+}
+.InputBox{
+    margin-right: 0vw;
+    width: 10vw;
+    height: 1vw;
+    min-height: 20px;
+    min-width: 10px;
+}
+/*LOGIN BLOCK_END */

@@ -1,0 +1,38 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 31 окт. 2023 г., 12:03:04
+    Author     : Пажылой ай3
+*/
+.math-input-div {
+    display: block;
+}
+.math-input{
+    background-color: lightcyan;
+    position: sticky;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    height: auto;
+    min-height: 100px
+}
+
+.math-input-confirm-button {
+    margin-left: auto;
+    margin-right: auto;
+    position: sticky;
+    display: block;
+}
+
+.math-input-title-operation-label {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.checkbox {
+    display: flex;
+    justify-content: center;
+}

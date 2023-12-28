@@ -1,0 +1,44 @@
+[INFO] NETBEANS-ExecEvent:{"type":"ProjectDiscoveryStarted"}
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for core:WebBD:war:1.0-SNAPSHOT
+[WARNING] 'dependencies.dependency.systemPath' for firstproject:SwingWolframTestProject:jar should not point at files within the project directory, ${project.basedir}/kernelLinkLib/SwingWolframTestProject.jar will be unresolvable by dependent projects @ line 34, column 25
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] NETBEANS-ExecEvent:{"mvncoreurls":["file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven-nblib\/netbeans-eventspy.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/conf\/logging\/","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/cdi-api-1.0.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/commons-cli-1.4.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/commons-io-2.5.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/commons-lang3-3.8.1.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/guava-25.1-android.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/guice-4.2.1-no_aop.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/jansi-1.17.1.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/javax.inject-1.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/jcl-over-slf4j-1.7.29.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/jsoup-1.12.1.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/jsr250-api-1.0.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-artifact-3.6.3.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-builder-support-3.6.3.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-compat-3.6.3.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-core-3.6.3.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-embedder-3.6.3.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-model-3.6.3.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-model-builder-3.6.3.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-plugin-api-3.6.3.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-repository-metadata-3.6.3.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-resolver-api-1.4.1.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-resolver-connector-basic-1.4.1.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-resolver-impl-1.4.1.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-resolver-provider-3.6.3.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-resolver-spi-1.4.1.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-resolver-transport-wagon-1.4.1.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-resolver-util-1.4.1.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-settings-3.6.3.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-settings-builder-3.6.3.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-shared-utils-3.2.1.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/maven-slf4j-provider-3.6.3.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/org.eclipse.sisu.inject-0.3.4.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/org.eclipse.sisu.plexus-0.3.4.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/plexus-cipher-1.7.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/plexus-component-annotations-2.1.0.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/plexus-interpolation-1.25.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/plexus-sec-dispatcher-1.4.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/plexus-utils-3.2.1.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/slf4j-api-1.7.29.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/wagon-file-3.3.4.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/wagon-http-3.3.4-shaded.jar","file:\/E:\/NetBeans%2012.6\/NetBeans-12.6\/netbeans\/java\/maven\/bin\/..\/lib\/wagon-provider-api-3.3.4.jar"],"prjcount":1,"type":"SessionStarted"}
+[WARNING] Failed to retrieve plugin descriptor for commons-fileupload:commons-fileupload:1.5: Failed to parse plugin descriptor for commons-fileupload:commons-fileupload:1.5 (C:\Users\Artyo\.m2\repository\commons-fileupload\commons-fileupload\1.5\commons-fileupload-1.5.jar): No plugin descriptor found at META-INF/maven/plugin.xml
+[INFO] NETBEANS-ExecEvent:{"prj":{"file":"E:\\Projects\\Java\\WebWolfram","id":"core:WebBD:1.0-SNAPSHOT"},"type":"ProjectStarted"}
+[INFO] 
+[INFO] -----------------------------< core:WebBD >-----------------------------
+[INFO] Building WebBD 1.0-SNAPSHOT
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] NETBEANS-ExecEvent:{"prj":{"file":"E:\\Projects\\Java\\WebWolfram","id":"core:WebBD:1.0-SNAPSHOT"},"type":"ProjectFailed"}
+[INFO] NETBEANS-ExecEvent:{"prj":{"file":"E:\\Projects\\Java\\WebWolfram","id":"core:WebBD:1.0-SNAPSHOT"},"type":"ProjectSkipped"}
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Skipping WebBD
+[INFO] This project has been banned from the build due to previous failures.
+[INFO] ------------------------------------------------------------------------
+[INFO] NETBEANS-ExecEvent:{"prj":{"file":"E:\\Projects\\Java\\WebWolfram","id":"core:WebBD:1.0-SNAPSHOT"},"type":"ProjectSkipped"}
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Skipping WebBD
+[INFO] This project has been banned from the build due to previous failures.
+[INFO] ------------------------------------------------------------------------
+[INFO] NETBEANS-ExecEvent:{"prjcount":1,"type":"SessionEnded"}
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.466 s
+[INFO] Finished at: 2023-11-14T05:11:09+03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Unknown lifecycle phase "mvn". You must specify a valid lifecycle phase or a goal in the format <plugin-prefix>:<goal> or <plugin-group-id>:<plugin-artifact-id>[:<plugin-version>]:<goal>. Available lifecycle phases are: validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy, pre-clean, clean, post-clean, pre-site, site, post-site, site-deploy. -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/LifecyclePhaseNotFoundException
