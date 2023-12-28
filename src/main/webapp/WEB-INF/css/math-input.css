@@ -10,13 +10,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     display: block;
 }
 .math-input{
-    background-color: #ced4da;
-    display: grid;
+    background-color: lightcyan;
     position: sticky;
-    width: 90%;
-    height: 250px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    height: auto;
+    min-height: 100px
 }
 
 .math-input-confirm-button {
@@ -30,4 +30,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+}
+
+.checkbox {
+    display: flex;
+    justify-content: center;
 }

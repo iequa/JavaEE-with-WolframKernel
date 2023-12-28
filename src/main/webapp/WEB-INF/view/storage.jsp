@@ -6,34 +6,25 @@
 %>
 <!DOCTYPE html>
 <html>
-<h:body class = "body">
     <jsp:include page="header.jsp"/>
-            <h1 style="text-align:center" class="display-4"></h1>
-            <div class="Widget2">
-                Выберите файл для загрузки: <br/>
-                <form action = "/WebBD/UploadServlet" method = "post"
-                      enctype = "multipart/form-data">
-                <input type = "file" name = "Открыть" size = "50" />
-                <br/>
-                <input type = "submit" value = "Загрузить" />
-                </form>
-            </div>
-            <div class= "RightWidget">
-                <a class="link" href=
-                "http://olymp.tsu.tula.ru/">
-                Расписание старого типа</a>
-                <a class="link" href=
-                "https://tulsu.ru/schedule/?group=220401">
-                Расписание нового типа</a>
-            </div>
+    <body class = "body">
+        <jsp:include page="menu.jsp"/>
+        <p class="lead">Файловое хранилище</p>
             <div class ="FilesBlock">
+                <div class="Widget2">
+                    <form action = "/WebBD/UploadServlet" method = "post"
+                          enctype = "multipart/form-data">
+                        Выберите файл для загрузки:
+                        <input type = "file" name = "Открыть" size = "50" />
+                        <input type = "submit" value = "Загрузить" />
+                    </form>
+                </div>
                 <table class="table">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Название файла</th>
                     <th scope="col">Действия</th>
-                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <% 
@@ -68,5 +59,5 @@
                   </tbody>
                 </table>
             </div>
-    </h:body>
+    </body>
 </html>

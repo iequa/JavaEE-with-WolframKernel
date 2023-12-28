@@ -37,7 +37,7 @@ import javax.servlet.annotation.WebListener;
 @WebServlet(name = "UploadServlet", urlPatterns = {"/UploadServlet"})
 public class UploadServlet extends HttpServlet {
    private static final DBConn connection = DBConn.getInstance();
-   private final static String SYSTEM_NAME = System.getProperty("os.name").toLowerCase();
+   public final static String SYSTEM_NAME = System.getProperty("os.name").toLowerCase();
 
    private boolean isMultipart;
    public static final String FILEPATH = SYSTEM_NAME.startsWith("win") ? 

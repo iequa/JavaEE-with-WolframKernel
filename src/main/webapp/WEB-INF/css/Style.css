@@ -6,6 +6,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : 21 нояб. 2022 г., 10:57:31
     Author     : YA
 */
+:root {
+    --header-block-width: 10%;
+}
+
 .link{
     font-family: "Bahnschrift";
     text-decoration: none;
@@ -20,15 +24,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     text-align: center;
     vertical-align: middle;
     line-height: 5vw;
-    width: 10%;
+    width: var(--header-block-width);
     height: 5vw;
     float: left;
 
 }
 .blockCenter{
+    font-size:0;
     margin: auto;
     background: #666666;
-    font-size: calc( (100vw - 5rem)/(47 - 30) * (1.5 - 1) + 1rem);
     text-align: center;
     font-weight: bold;
     width: 80%;
@@ -36,7 +40,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     float: left;
     min-width: 40px;
     min-height: 30px;
+}
 
+.mainText {
+    font-size: calc(35px + 0.5vw);
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    min-width: 40px;
+    min-height: 30px;
 }
 
 .blockRight{
@@ -45,7 +57,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     font-family: "Bahnschrift";
     font-size: calc( (100vw - 80rem)/(60 - 10) * (1.5 - 1) + 1rem);
     text-align: center;
-    width: 10%;
+    width: var(--header-block-width);
     height: 5vw;
     line-height: 5vw;
     float: left;
@@ -87,6 +99,56 @@ div.mainContainer{
 }
 /*MAIN_CONT_END */
 
+/*NO_LOGIN_CONTENT*/
+.group-header{
+    margin-bottom: 0px;
+    padding-bottom: 20px;
+    margin-left: var(--header-block-width);
+    margin-right: var(--header-block-width);
+}
+
+.display-4{
+    overflow: hidden;
+    font-size: 90px;
+    text-align: center;
+    animation: showTitleDiv 3s forwards;
+}
+@keyframes showTitleDiv {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 100px;
+  }
+}
+
+.lead {
+    overflow: hidden;
+    text-align: center;
+    font-size: 40px;
+    animation: showDiv 1.3s forwards;
+}
+@keyframes showDiv {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 60px;
+  }
+}
+
+.studlist {
+    margin-left: var(--header-block-width);
+    margin-right: var(--header-block-width);
+}
+
+.imgmain {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+/*NO_LOGIN_CONTENT_END*/
+
 /*MAIN_HEADER */
 div.MainHeader{
     background-color: rgba(69,175,94,0.5);
@@ -100,45 +162,48 @@ div.MainHeader{
     margin-right: auto;
     width: 20vw;
 }
+
+.message {
+    overflow: hidden;
+    text-align: center;
+    font-size: 30px;
+    animation: showDiv 1.3s forwards;
+}
+@keyframes showDiv {
+  0% {
+    height: 0px;
+  }
+  100% {
+    height: 60px;
+  }
+}
 /*MAIN_HEADER_END */
 
-/*WIDGET */
-.RightWidget{
-    background-color: rgba(1,255,255,1);
-    margin-left: 0;
-    margin-top: 0vh;
-    margin-right: 0;
-    display: flex;
-    width: 20vw;
-    height: 6.1vw;
-    min-height: 2vw;
-    font-size: calc( (100vw - 80rem)/(60 - 10) * (1.5 - 1) + 1rem);
-    flex-direction: column;
-    float: right;
-    justify-content: center;
-    text-align: center;
-    border-style: groove;
-    border-width: 1px;
-    border-color : #1b1e21;
-}
+/*WIDGETS */
 
 .Widget2{
-    background-color: rgba(1,255,255,1);
     margin-left: 0;
     position: relative;
     margin-top: 0;
     margin-right: 0;
     display: flex;
     height: auto;
-    width: 20vw;
+    width: 100%;
     font-size: calc( (100vw - 80rem)/(60 - 10) * (1.5 - 1) + 1rem);
-    flex-direction: column;
+    flex-direction: row;
     float: left;
-    justify-content: center;
+    justify-content: space-between;
     border-style: groove;
     border-width: 1px;
-    border-color : #1b1e21;
-    
+    border-color: #1b1e21;
+}
+
+.menu-block {
+    margin-top: 1%;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    justify-content: center;
 }
 /*WIDGET_END */
 
@@ -169,17 +234,17 @@ body{
     calc((100vw - 5rem)/(47 - 30) * (1.5 - 1) + 1rem);
 }
 .FilesBlock{
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: var(--header-block-width);
+    margin-right: var(--header-block-width);
     margin-top: 0%;
     margin-bottom: auto;
-    width: 100%;
+    width: 80%;
     min-width: 25vw;
     height: 65vh;
     min-height: 40%;
-    border-style: solid;
+    border-style: ridge;
     border-color : #1b1e21;
-    background-color: rgba(150,163,161,1);
+    background-color: lightcyan;
     align-content: flex-start;
     display:inline-block;
     justify-content: center;
@@ -210,8 +275,6 @@ body{
     min-height: 140px;
     min-width: 160px;
 }
-
-/*LOGIN BLOCK_END */
 
 .BigText{
     text-align: center;

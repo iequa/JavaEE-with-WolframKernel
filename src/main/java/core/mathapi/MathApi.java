@@ -6,7 +6,6 @@ package core.mathapi;
 
 import core.files.UploadServlet;
 import core.utils.SessionHelper;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ import ru.firstproject.kernelwrapper.KernelLinkWrapper;
  */
 public class MathApi extends HttpServlet {
     private String inputString = "";
+    private boolean resImage;
     private String evaluateFileIndex = "";
     private final static String LINUX_EOL = "\r";
     private final static String WINDOWS_EOL = "\r\n";
@@ -38,13 +38,19 @@ public class MathApi extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        SessionHelper.checkIsUserLogged(request.getSession());
         inputString = request.getParameter("inputstring");
+        final String checkbox = request.getParameter("graphicRes");
+        resImage = checkbox != null ? checkbox.equals("on") : false;
         evaluateFileIndex = request.getParameter("file");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             if (inputString != null && !inputString.isEmpty()) {
                 final var parsedLines = parseStringToList(inputString);
-                final var answer = KernelLinkWrapper.evaluateString(parsedLines);
+                final var answer = resImage ? 
+                        KernelLinkWrapper.evaluateImage(parsedLines)
+                        : 
+                        KernelLinkWrapper.evaluateString(parsedLines);
                 request.setAttribute("question", inputString);
                 request.setAttribute("answer", answer);
                 request.getRequestDispatcher("/mathematica").forward(request, response);
